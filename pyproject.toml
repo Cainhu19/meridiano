@@ -29,6 +29,7 @@ dependencies = [
 [project.scripts]
 meridiano = "meridiano:main"
 meridiano-briefing = "meridiano.run_briefing:main"
+meridiano-workflow = "meridiano.workflow:main"
 
 [build-system]
 requires = ["setuptools>=61"]

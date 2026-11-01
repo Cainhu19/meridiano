@@ -10,9 +10,9 @@ RSS_FEEDS = [
     "https://www.nexojornal.com.br/rss.xml",  # Nexo Jornal
     "https://outraspalavras.net/feed/",  # Outras Palavras
     "https://jacobin.com.br/feed/",  # Jacobin Brasil
-    "https://averdade.org.br/feed/",  # Jornal A Verdade
     "https://revistaforum.com.br/rss/feed.html",  # Revista Fórum
     "https://operamundi.uol.com.br/feed/",  # Opera Mundi
+    "https://piaui.uol.com.br/" #Revista piaui
 ]
 
 pt_br = " Responda em português brasileiro."

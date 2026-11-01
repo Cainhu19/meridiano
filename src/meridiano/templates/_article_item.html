@@ -5,7 +5,10 @@
                 alt="Image for {{ article.title }}"
                 class="article-image"
                 loading="lazy"
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                onerror="this.style.display='none'; this.parentElement.querySelector('.article-image-placeholder').style.display='flex';">
+            <div class="article-image-placeholder" style="display: none;">
+                <i class="fas fa-image"></i> No Image
+            </div>
         {% else %}
             <div class="article-image-placeholder">
                 <i class="fas fa-image"></i> No Image

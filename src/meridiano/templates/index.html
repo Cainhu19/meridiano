@@ -6,7 +6,11 @@
     <div class="container">
         {% include 'header.html' %}
 
-        <h2>Generated Briefings</h2>
+        <section class="page-intro">
+            <p class="eyebrow"><i class="fas fa-compass"></i> Intelligence desk</p>
+            <h1>Generated Briefings</h1>
+            <p class="page-subtitle">Stay oriented with concise, AI-assisted updates from your selected sources.</p>
+        </section>
 
         <div class="profile-filter">
             Filter by Profile:
@@ -23,12 +27,13 @@
         {% if briefs %}
             <ul class="brief-list">
                 {% for brief in briefs %}
-                <li class="brief-item">
+                <li class="brief-item briefing-card">
                     <a href="{{ url_for('view_brief', brief_id=brief['id']) }}" class="brief-link">
-                        Briefing from {{ brief['generated_at'] | datetimeformat('%Y-%m-%d %H:%M') }}
+                        <span class="brief-card-title">Briefing from {{ brief['generated_at'] | datetimeformat('%Y-%m-%d %H:%M') }}</span>
+                        <span class="brief-card-action">Read briefing <i class="fas fa-arrow-right"></i></span>
                     </a>
                     <span class="profile-badge list-badge">{{ brief['feed_profile'] }}</span>
-                    <span class="brief-meta"> (ID: {{ brief['id'] }})</span>
+                    <span class="brief-meta">ID {{ brief['id'] }}</span>
                 </li>
                 {% endfor %}
             </ul>

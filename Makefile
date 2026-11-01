@@ -41,4 +41,7 @@ test: format
 bare-run:
 	uv run python -m meridiano.run_briefing ${ARGS}
 
-.PHONY: up down logs ps build bash migrate run app
+workflow:
+	uv run python -m meridiano.workflow $(ARGS)
+
+.PHONY: up down logs ps build bash migrate run workflow app

@@ -240,6 +240,46 @@ command for this. Here is an example cron job that runs the briefing process dai
 
 **Note:** Make sure to replace `/path/to/meridiano` with the actual path to your Meridiano project directory.
 
+## Scheduled local processing and homelab sync
+
+For the lightweight SQLite deployment, run the workflow on the machine with Ollama.
+It scrapes, summarizes and embeds new articles, rates processed articles, optionally
+generates a briefing, and can publish the completed database to the homelab.
+
+Add these settings to `.env` when using database synchronization:
+
+```dotenv
+HOMELAB_SSH_TARGET=user@homelab
+HOMELAB_DB_PATH=/opt/meridiano/meridian.db
+HOMELAB_SERVICE=meridiano
+# Optional, for example: -i ~/.ssh/meridiano
+# HOMELAB_SSH_OPTS=-i ~/.ssh/meridiano
+```
+
+The SSH user must be able to upload the temporary database file and run
+`sudo systemctl stop meridiano`, `sudo mv`, and `sudo systemctl start meridiano`.
+The workflow uploads `meridian.db.next` first, then briefly stops the UI service and
+atomically replaces the homelab database. It does not overwrite the live SQLite file
+while the UI is running.
+
+Run it manually from the project root:
+
+```bash
+.venv/bin/python -m meridiano.workflow --feed default --generate-brief --sync
+```
+
+Omit `--generate-brief` when only the article pipeline should run, or omit `--sync`
+to keep the results local. The same command can be scheduled with cron:
+
+```cron
+0 7 * * * cd /path/to/meridiano && .venv/bin/python -m meridiano.workflow --feed default --generate-brief --sync >> meridiano-workflow.log 2>&1
+```
+
+The workflow exits non-zero if processing or synchronization fails, so cron and
+external monitoring can detect failed runs. Configure passwordless SSH keys and
+restricted sudo rules for the service and target paths rather than embedding a
+password in the command.
+
 ## Contributing
 
 Read the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute to this project.

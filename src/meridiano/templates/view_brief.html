@@ -6,10 +6,11 @@
     <div class="container">
         {% include 'header.html' %}
 
-        <h2>Intelligence Brief</h2>
+        <p class="eyebrow"><i class="fas fa-file-alt"></i> Daily briefing</p>
+        <h1>Intelligence Brief</h1>
         <p class="timestamp">Generated: {{ generation_time }} (ID: {{ brief_id }})</p>
         <hr>
-        <div class="brief-content">
+        <div class="brief-content reading-content">
             {{ brief_content|safe }}
         </div>
     </div>
